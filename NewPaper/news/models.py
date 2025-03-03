@@ -68,3 +68,11 @@ class Comment(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
+
+class News(models.Model):
+    title = models.CharField(max_length=200)  # Заголовок новости
+    text = models.TextField()  # Текст новости
+    pub_date = models.DateTimeField(auto_now_add=True)  # Дата публикации
+
+    def __str__(self):
+        return self.title

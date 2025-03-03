@@ -1,0 +1,15 @@
+{% extends "default.html" %}
+{% load news_tags %}
+
+{% block content %}
+    <h1>Список новостей</h1>
+    {% for item in news %}
+        <div>
+            <h2>{{ item.title|censor }}</h2>
+            <p>Дата публикации: {{ item.pub_date|date:"d.m.Y" }}</p>
+            <p>Превью: {{ item.text|slice:":20"|censor }}...</p>
+            <a href="{% url 'news_detail' item.id %}">Подробнее</a>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
