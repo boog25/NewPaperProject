@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>Список новостей</h1>
-    {% for item in news %}
+    {% for item in page_obj %}
         <div>
             <h2>{{ item.title|censor }}</h2>
             <p>Дата публикации: {{ item.pub_date|date:"d.m.Y" }}</p>
@@ -12,4 +12,22 @@
         </div>
         <hr>
     {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; первая</a>
+                <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}
